@@ -18,7 +18,7 @@ export function OpportunityCards({data, isLoading = false}: OpportunityCardProps
       {COLUMNS.map((column) => (
         <Card key={column.key} className="aspect-video overflow-y-auto">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
+            <CardTitle className="flex items-center gap-2 text-gray-400">
               <column.icon className={`size-4 ${column.accent}`}/>
               {column.title}
             </CardTitle>

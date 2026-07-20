@@ -92,9 +92,9 @@ export function AppSidebar({ ...props }: React.ComponentProps <typeof Sidebar>) 
 							render={
 								<a href="#">
 									<div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-										<Search className="size-4" />
+										<Search className="size-4 text-orange-500" />
 									</div>
-									<div className="grid flex-1 text-left text-sm leading-tight">
+									<div className="grid flex-1 text-left text-sm text-orange-500 leading-tight">
 										<span className="truncate font-semibold">
 											Opportunity Scout
 										</span>
@@ -112,7 +112,7 @@ export function AppSidebar({ ...props }: React.ComponentProps <typeof Sidebar>) 
 			<SidebarContent>
 				<NavMain items={data.navMain} />
 				<NavProjects projects={data.projects} />
-				<NavSecondary items={data.navSecondary} className="mt-auto" />
+				<NavSecondary items={data.navSecondary} className="mt-auto text-gray-50" />
 			</SidebarContent>
 
 			<SidebarFooter>

@@ -30,7 +30,7 @@ export function SearchForm({ onSearch, isLoading = false }: SearchFormProps) {
     <Card>
       <CardHeader>
         <CardTitle>New Search Opportunities</CardTitle>
-        <CardDescription>
+        <CardDescription className="text-gray-50">
           Enter a market category, and we’ll analyze competitors, prices,
           customer reviews, and trends for you.
         </CardDescription>
@@ -50,6 +50,7 @@ export function SearchForm({ onSearch, isLoading = false }: SearchFormProps) {
           <Button
             type="submit"
             disabled={isLoading || category.trim().length === 0}
+            className="text-gray-400"
           >
             {isLoading ? (
               <>
@@ -58,7 +59,7 @@ export function SearchForm({ onSearch, isLoading = false }: SearchFormProps) {
               </>
             ) : (
               <>
-                <Search className="mr-2 size-4" />
+                <Search className="mr-2 size-4 text-gray-400" />
                 Analyzing the market
               </>
             )}

@@ -38,8 +38,8 @@ export function NavProjects({
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Projects</SidebarGroupLabel>
-      <SidebarMenu>
+      <SidebarGroupLabel className="text-orange-500">Projects</SidebarGroupLabel>
+      <SidebarMenu className="text-gray-400">
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton 
@@ -60,7 +60,7 @@ export function NavProjects({
                 }
               />
               <DropdownMenuContent
-                className="w-48"
+                className="w-48 text-orange-500"
                 side={isMobile ? "bottom" : "right"}
                 align={isMobile ? "end" : "start"}
               >
