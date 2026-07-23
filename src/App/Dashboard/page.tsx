@@ -44,7 +44,7 @@ export default function Page() {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 text-lg font-medium text-orange-500">
+        <header className="flex h-16 shrink-0 items-center gtext-lgap-2  font-medium text-orange-500">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator
