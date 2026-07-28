@@ -40,7 +40,7 @@ export function OpportunityCards({data, isLoading = false}: OpportunityCardProps
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground text-blue-400">
                 No {column.key} to display. Run a search to see results here.
               </p>
             )}
