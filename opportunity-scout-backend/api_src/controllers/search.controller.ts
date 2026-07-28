@@ -1,6 +1,8 @@
 import { Request, Response } from 'express'
-import { YelpSearchResponse } from '../types/yelp.types';
+import { FourSquareSearchResponse } from '../types/fourSquare.types';
 
+
+const FOURSQUARE_API_URL = 'https://places-api.foursquare.com/places/search';
 
 export async function searchBusinesses(req: Request, res: Response): Promise<void> {
   const { term, location } = req.query;
@@ -11,14 +13,15 @@ export async function searchBusinesses(req: Request, res: Response): Promise<voi
   }
 
   try {
-    const url = new URL('https://api.yelp.com/v3/businesses/search');
-    url.searchParams.append('term', term);
-    url.searchParams.append('location', location);
+    const url = new URL(FOURSQUARE_API_URL);
+    url.searchParams.append('query', term);
+    url.searchParams.append('near', location);
     url.searchParams.append('limit', "10");
 
     const response = await fetch(url, {
         headers: {
-            'Authorization': `Bearer ${process.env.YELP_API_KEY}`,
+            'Authorization': `Bearer ${process.env.FOURSQUARE_API_KEY}`,
+            'X-Places-Api-Version': '2025-06-17'
         },
     });
 
@@ -28,11 +31,11 @@ export async function searchBusinesses(req: Request, res: Response): Promise<voi
       return;
     }
 
-    const data: YelpSearchResponse = await response.json();
+    const data: FourSquareSearchResponse = await response.json();
     res.json(data);
 
   } catch (error) {
-    console.error('Yelp API Error:', error);
-    res.status(500).json({ error: "Failed to search data from Yelp" });
+    console.error('FourSquare API Error:', error);
+    res.status(500).json({ error: "Failed to search data from FourSquare" });
   }
 }
