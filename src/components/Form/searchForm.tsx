@@ -12,19 +12,26 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useState } from "react";
 
 interface SearchFormProps {
-  onSearch: (category: string) => void;
+  onSearch: (category: string, location: string) => void;
   isLoading: boolean;
 }
 
 export function SearchForm({ onSearch, isLoading = false }: SearchFormProps) {
-  const [category, setCategory] = React.useState("");
+  const [category, setCategory] = useState("");
+  const [location, setLocation] = useState("")
+
+  const isFormValid = 
+    category.trim().length > 0 && location.trim().length > 0;
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (category.trim().length === 0) return;
-    onSearch(category.trim());
+    if (!isFormValid) {
+      return;
+    }
+    onSearch(category.trim(), location.trim());
   }
   return (
     <Card>
@@ -47,9 +54,16 @@ export function SearchForm({ onSearch, isLoading = false }: SearchFormProps) {
             disabled={isLoading}
             className="flex-1"
           />
+          <Input
+            value={location}
+            placeholder="Enter a location (e.g. Bogota, Medellin)"
+            onChange={(e) => setLocation(e.target.value)}
+            disabled={isLoading}
+            className="flex-1"
+          />
           <Button
             type="submit"
-            disabled={isLoading || category.trim().length === 0}
+            disabled={isLoading || category.trim().length === 0 || location.trim().length === 0}
             className="text-gray-400"
           >
             {isLoading ? (
