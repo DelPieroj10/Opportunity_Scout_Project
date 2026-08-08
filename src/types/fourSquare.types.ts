@@ -32,6 +32,5 @@ export interface FourSquareBusiness {
 }
 
 export interface FourSquareSearchResponse {
-	results: never[];
-	businesses: FourSquareBusiness[];
+	results: FourSquareBusiness[];
 }
