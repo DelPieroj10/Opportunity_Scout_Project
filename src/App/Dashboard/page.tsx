@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { SearchForm } from "@/components/Form/searchForm";
 import { AppSidebar } from "@/components/Sidebar-Component/app-sidebar";
 import { OpportunityCards } from "@/components/Cards/opportunity-card";
-import type { OpportunitySummary } from "@/components/Cards/card-interface";
-import { mapFoursquareToSummary } from "@/lib/mapFoursquareToSummary";
+import { MarketDistributionCharts } from "@/components/Charts/MarketDistributionCharts";
+
+import { useOpportunitySearchContext } from "@/context/OpportunitySearchContext";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -20,29 +20,10 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { fetchOpportunities } from "@/lib/api";
 
 export default function Page() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [summary, setSummary] = useState<OpportunitySummary | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  async function handleSearch(category: string) {
-    setIsLoading(true);
-    setError(null);
-    console.log("Searching for category:", category);
-
-    try {
-      const data = await fetchOpportunities(category);
-      setSummary(mapFoursquareToSummary(data, category));
-    } catch (e) {
-      console.error(e);
-      setError("Something went wrong fetching opportunities. Try again.");
-      setSummary(null);
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  const { summary, isLoading, error, search } =
+    useOpportunitySearchContext();
 
   return (
     <SidebarProvider>
@@ -69,9 +50,15 @@ export default function Page() {
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <SearchForm onSearch={handleSearch} isLoading={isLoading} />
+          <SearchForm onSearch={search} isLoading={isLoading} />
           {error && <p className="text-sm text-destructive">{error}</p>}
           <OpportunityCards data={summary} isLoading={isLoading} />
+          { summary && (
+            <MarketDistributionCharts
+              categoryDistribution={summary.categoryDistribution}
+              distanceDistribution={(summary as any).distanceDistribution}
+            />
+          ) }
           <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
         </div>
       </SidebarInset>

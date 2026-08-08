@@ -1,19 +1,15 @@
-//import { useState } from 'react'
-import Page from './App/Dashboard/page'
-import './App.css'
+import Page from "@/App/Dashboard/page";
+import { OpportunitySearchProvider } from "@/context/OpportunitySearchContext";
 
 function ScoutApp() {
-  //const [count, setCount] = useState(0)
-
   return (
-  <>
-    <Page>
-      <h1 className="text-3xl font-bold underline">
-        Welcome to my App!
-      </h1>
-    </Page>
-  </>
-  )
+    <>
+      <OpportunitySearchProvider>
+        <Page />
+        <h1 className="text-3xl font-bold">Welcome to my App!</h1>
+      </OpportunitySearchProvider>
+    </>
+  );
 }
 
-export default ScoutApp
+export default ScoutApp;
