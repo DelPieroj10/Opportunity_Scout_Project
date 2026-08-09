@@ -2,12 +2,10 @@ import type { FourSquareSearchResponse } from "@/types/fourSquare.types";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const DEFAULT_LOCATION = "Bogota";
-
-export async function fetchOpportunities(term: string): Promise<FourSquareSearchResponse> {
+export async function fetchOpportunities(term: string, location: string): Promise<FourSquareSearchResponse> {
   const url = new URL(`${API_URL}/api/search`);
   url.searchParams.set("term", term);
-  url.searchParams.set("location", DEFAULT_LOCATION);
+  url.searchParams.set("location", location);
 
   const response = await fetch(url)
 
