@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors({
-    origin: process.env.CLIENT_URL, // Adjust this to your frontend's origin
+    origin: process.env.CLIENT_URL, 
   })
 );
 app.use(express.json());
