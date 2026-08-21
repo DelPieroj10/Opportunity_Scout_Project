@@ -6,8 +6,6 @@ import {
   BarChart3,
   Users,
   DollarSign,
-  MessageSquareWarning,
-  TrendingUp,
   History,
   Settings2,
   LifeBuoy,
@@ -54,20 +52,6 @@ const data = {
         { title: "Detected strategies", url: "#" },
         { title: "Sector benchmarks", url: "#" },
       ],
-    },
-    {
-      title: "Customer Reviews",
-      url: "#",
-      icon: MessageSquareWarning,
-      items: [
-        { title: "General sentiment", url: "#" },
-        { title: "Frequent complaints", url: "#" },
-      ],
-    },
-    {
-      title: "Market Trends",
-      url: "#",
-      icon: TrendingUp,
     },
   ],
   navSecondary: [
