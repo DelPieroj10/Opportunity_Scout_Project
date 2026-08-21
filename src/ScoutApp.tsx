@@ -6,7 +6,6 @@ function ScoutApp() {
     <>
       <OpportunitySearchProvider>
         <Page />
-        <h1 className="text-3xl font-bold">Welcome to my App!</h1>
       </OpportunitySearchProvider>
     </>
   );
