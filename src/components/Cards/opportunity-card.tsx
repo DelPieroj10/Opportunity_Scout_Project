@@ -11,19 +11,18 @@ interface OpportunityCardProps {
   isLoading?: boolean;
 }
 
-
 export function OpportunityCards({data, isLoading = false}: OpportunityCardProps) {
   return (
     <div className="grid auto-rows-min gap-4 md:grid-cols-3">
       {COLUMNS.map((column) => (
-        <Card key={column.key} className="aspect-video overflow-y-auto">
+        <Card key={column.key} className="flex flex-col h-full">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-gray-400">
               <column.icon className={`size-4 ${column.accent}`}/>
               {column.title}
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="max-h-55 overflow-y-auto ">
             {isLoading ? (
               <div className="flex flex-col gap-2">
                 <Skeleton className="h-4 w-full" />
@@ -31,9 +30,9 @@ export function OpportunityCards({data, isLoading = false}: OpportunityCardProps
                 <Skeleton className="h-4 w-2/3" />
               </div>
             ) : data && data[column.key].length > 0 ? (
-              <ul className="flex flex-2 gap-2 text-sm text-muted-foreground">
+              <ul className="flex flex-col gap-2 text-sm text-muted-foreground text-left">
                 {data[column.key].map((item, id) => (
-                  <li key={id} className="flex gap-2">
+                  <li key={id} className="flex gap-2 mr-2">
                     <span aria-hidden="true">•</span>
                     <span>{item}</span>
                   </li>
