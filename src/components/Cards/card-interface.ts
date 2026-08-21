@@ -3,7 +3,9 @@
 import type {
   CategoryDistributionItem,
   DistanceBucketItem,
-} from "@/lib/marketAnalytics";
+  MarketTrendsDescription,
+} from "@/lib/marketAnalytics-Interfaces";
+import type { DigitalPresenceInsights } from "@/lib/reviewInsights";
 
 export interface OpportunitySummary {
   opportunities: string[];
@@ -11,4 +13,6 @@ export interface OpportunitySummary {
   recommendations: string[];
   categoryDistribution: CategoryDistributionItem[];
   distanceDistribution: DistanceBucketItem[];
+  marketTrends: MarketTrendsDescription;
+  digitalPresence: DigitalPresenceInsights;
 }

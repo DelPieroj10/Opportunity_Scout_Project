@@ -1,9 +1,11 @@
 import type { FourSquareSearchResponse } from "@/types/fourSquare.types";
 import type { OpportunitySummary } from "@/components/Cards/card-interface";
-import {
+import { 
   buildCategoryDistribution,
   buildLocationDistribution,
+  buildMarketTrends,
 } from "@/lib/marketAnalytics";
+import { buildDigitalPresenceInsights } from "@/lib/reviewInsights";
 
 export function mapFoursquareToSummary(
   data: FourSquareSearchResponse,
@@ -24,6 +26,8 @@ export function mapFoursquareToSummary(
       ],
       categoryDistribution: [],
       distanceDistribution: [],
+      marketTrends: buildMarketTrends(businesses),
+      digitalPresence: buildDigitalPresenceInsights(businesses),
     };
   }
 
@@ -42,7 +46,7 @@ export function mapFoursquareToSummary(
   const recommendations = businesses
     .slice(0, 5)
     .map(
-      (b: { name: string; website?: string; categories: any[] }) =>
+      (b) =>
         `Study "${b.name}"${b.website ? `(${b.website})` : ""} as a reference competitor.`,
     );
 
@@ -52,5 +56,7 @@ export function mapFoursquareToSummary(
     recommendations,
     categoryDistribution: buildCategoryDistribution(businesses),
     distanceDistribution: buildLocationDistribution(businesses),
+    marketTrends: buildMarketTrends(businesses),
+    digitalPresence: buildDigitalPresenceInsights(businesses),
   };
 }

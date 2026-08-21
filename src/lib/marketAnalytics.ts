@@ -1,16 +1,5 @@
 import type{ FourSquareBusiness } from "../types/fourSquare.types";
-
-export interface CategoryDistributionItem {
-  category: string;
-  count: number;
-  percentage: number;  
-}
-
-export interface DistanceBucketItem {
-  label: string;
-  count: number;
-  percentage: number;
-}
+import type { CategoryDistributionItem, DistanceBucketItem, MarketTrendsDescription } from "./marketAnalytics-Interfaces";
 
 const DISTANCE_BUCKETS = [
   {label: "0-500m", maxMeters: 500},
@@ -68,3 +57,40 @@ export function buildLocationDistribution ( businesses: FourSquareBusiness[]
     };
   });
 }
+
+export function buildMarketTrends( businesses: FourSquareBusiness[] )
+: MarketTrendsDescription {
+  const category = buildCategoryDistribution(businesses);
+  const distances = buildLocationDistribution(businesses);
+
+  if (businesses.length === 0) {
+    return {
+      summary: "No data businesses found to analyze.",
+      details: []
+    };
+  }
+
+  const topCategory = category[0];
+  const dominantDistance = 
+    distances.length > 0 
+    ? distances.reduce((max, item)=> 
+     item.count > max.count ? item : max) 
+    : null;
+
+    const diversity = category.length;
+
+    const summary = `The market is mainly concentrated in ${topCategory?.category ?? "categories not defined"}, with a presence on top in the range ${dominantDistance?.label ?? "unknown"} distinct categories.`;
+
+    const details: string[] = [
+      `The most common category is "${topCategory?.category}" with ${topCategory?.percentage}% of businesses.`,
+      dominantDistance
+      ? `The majority of businesses are located within "${dominantDistance.label}", accounting for ${dominantDistance.percentage}% of the total.`
+      : "Distance distribution data is not available.",
+      `There are ${diversity} distinct categories present in the market, that reflect ${diversity > 5 ? "high diversity" : "limited diversity"}.`
+    ];
+  return {
+    summary,
+    details  
+  };
+}
+
