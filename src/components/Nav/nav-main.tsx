@@ -52,7 +52,7 @@ export function NavMain({
                   </a>
                 }
               />
-              {item.items?.length ? (
+              {item.items?.length? (
                 <>
                   <CollapsibleTrigger
                     render={
@@ -79,7 +79,7 @@ export function NavMain({
                     </SidebarMenuSub>
                   </CollapsibleContent>
                 </>
-              ) : null}
+              ): null}
           </Collapsible>
         ))}
       </SidebarMenu>
