@@ -22,7 +22,7 @@ const ACTIVE_STYLE =
   "data-active:bg-sidebar-primary data:active:font-semibold data-active:text-sidebar-primary-foreground data-active:hover:bg-sidebar-primary data-active:hover:text-sidebar-primary-foreground";
 
 export function NavMain({
-  items,
+  items: items,
 }: {
   items: {
     title: string;
@@ -41,29 +41,29 @@ export function NavMain({
         Platform
       </SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) => (
+        {items.map((items) => (
           <Collapsible
-            key={item.title}
-            defaultOpen={item.isActive}
+            key={items.title}
+            defaultOpen={items.isActive}
             render={<SidebarMenuItem />}
           >
             <CollapsibleTrigger
               render={
                 <SidebarMenuButton
-                  tooltip={item.title}
-                  isActive={item.isActive}
+                  tooltip={items.title}
+                  isActive={items.isActive}
                   className={ACTIVE_STYLE}
                 >
-                  <item.icon />
-                  <span>{item.title}</span>
+                  <items.icon />
+                  <span>{items.title}</span>
                   <ChevronRight className="ml-auto transition-transform group-data-panel-open/menu-button:rotate-90" />
                 </SidebarMenuButton>
               }
             />
-            {item.items?.length ? (
+            {items.items?.length ? (
               <CollapsibleContent>
                 <SidebarMenuSub>
-                  {item.items?.map((subItem) => (
+                  {items.items?.map((subItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
                       <SidebarMenuSubButton
                         render={
