@@ -1,12 +1,7 @@
 "use client"
 
-import {
-  Folder,
-  MoreHorizontal,
-  Share,
-  Trash2,
-  type LucideIcon,
-} from "lucide-react"
+import { Fragment } from "react"
+import { MoreHorizontal, type LucideIcon } from "lucide-react"
 
 import {
   DropdownMenu,
@@ -25,21 +20,32 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 
+interface ProjectAction {
+  label: string;
+  icon: LucideIcon;
+  destructive?: boolean; 
+}
+
+interface ProjectItem {
+  name: string;
+  url: string;
+  icon: LucideIcon;
+  actions: ProjectAction[];
+}
+
 export function NavProjects({
   projects,
 }: {
-  projects: {
-    name: string
-    url: string
-    icon: LucideIcon
-  }[]
+  projects: ProjectItem[];
 }) {
-  const { isMobile } = useSidebar()
+  const { isMobile } = useSidebar();
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel className="text-orange-500">Projects</SidebarGroupLabel>
-      <SidebarMenu className="text-gray-400">
+      <SidebarGroupLabel className="text-sidebar-foreground/85">
+        Projects
+      </SidebarGroupLabel>
+      <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton 
@@ -53,41 +59,33 @@ export function NavProjects({
             <DropdownMenu>
               <DropdownMenuTrigger 
                 render={
-                  <SidebarMenuAction showOnHover>
+                  <SidebarMenuAction>
                     <MoreHorizontal />
-                    <span className="sr-only">More</span>
+                    <span className="sr-only">More actions for {item.name}</span>
                   </SidebarMenuAction>
                 }
               />
               <DropdownMenuContent
-                className="w-48 text-orange-500"
+                className="w-48"
                 side={isMobile ? "bottom" : "right"}
                 align={isMobile ? "end" : "start"}
               >
-                <DropdownMenuItem>
-                  <Folder className="text-muted-foreground" />
-                  <span>View Project</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Share className="text-muted-foreground" />
-                  <span>Share Project</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Trash2 className="text-muted-foreground" />
-                  <span>Delete Project</span>
-                </DropdownMenuItem>
+                {item.actions.map((action) => (
+                  <Fragment key={action.label}>
+                    {action.destructive && <DropdownMenuSeparator />}
+                    <DropdownMenuItem
+                      variant={action.destructive ? "destructive" : "default"}
+                    >
+                      <action.icon />
+                      <span>{action.label}</span>
+                    </DropdownMenuItem>
+                  </Fragment>
+                ))}
               </DropdownMenuContent>
             </DropdownMenu>
           </SidebarMenuItem>
         ))}
-        <SidebarMenuItem>
-          <SidebarMenuButton>
-            <MoreHorizontal />
-            <span>More</span>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
-  )
+  );
 }
