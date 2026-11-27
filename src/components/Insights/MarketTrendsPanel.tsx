@@ -24,8 +24,8 @@ export function MarketTrendsPanel({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-gray-400">
-          <TrendingUp className="size-4 text-purple-500" />
+        <CardTitle className="flex items-center gap-2">
+          <TrendingUp className="size-4 text-brand-light" />
           Market Trends (estimated)
         </CardTitle>
         <CardDescription className="text-gray-50">
@@ -56,7 +56,7 @@ export function MarketTrendsPanel({
             </ul>
           </div>
         ) : (
-          <p className="text-sm text-muted-foreground text-blue-400">
+          <p className="text-sm text-muted-foreground">
             No data to display yet. Run a search to see estimated market trends
             signals here.
           </p>

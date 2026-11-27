@@ -24,8 +24,8 @@ export function CustomerReviewsPanel({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-gray-400">
-          <Globe className="size-4 text-sky-500" />
+        <CardTitle className="flex items-center gap-2">
+          <Globe className="size-4 text-brad-light" />
           Customer Reviews (estimated)
         </CardTitle>
         <CardDescription className="text-gray-50">
@@ -44,7 +44,7 @@ export function CustomerReviewsPanel({
         ) : data && data.totalBusinesses > 0 ? (
           <div className="flex flex-col gap-4">
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-semibold text-sky-500">
+              <span className="text-3xl font-semibold text-primary">
                 {data.websiteCoveragePercentage}%
               </span>
               <span className="text-sm text-muted-foreground">
@@ -62,7 +62,7 @@ export function CustomerReviewsPanel({
             </ul>
 
             {data.gapsExamples.length > 0 && (
-              <div className="flex items-start gap-2 rounded-md border border-amber-500/30 bg-amber-500/10 p-3 text-sm text-amber-600">
+              <div className="flex items-start gap-2 rounded-md border border-amber-500/30 bg-amber-500/10 p-3 text-sm text-warning">
                 <AlertTriangle className="mt-0.5 size-4 shrink-0" />
                 <span>
                   No website found for {data.gapsExamples.join(", ")}.
@@ -71,7 +71,7 @@ export function CustomerReviewsPanel({
             )}
           </div>
         ) : (
-          <p className="text-sm text-muted-foreground text-blue-400">
+          <p className="text-sm text-muted-foreground">
             No data to display yet. Run a search to see estimated customer
             review signal here.
           </p>

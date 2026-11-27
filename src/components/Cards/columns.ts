@@ -7,20 +7,20 @@ export const COLUMNS = [
     key: "opportunities" as const,
     title: "Opportunities",
     icon: CheckCircle2,
-    accent: "text-emerald-500",
+    accent: "text-success",
   },
   {
     id: 2,
     key: "risks" as const,
     title: "Risks",
     icon: AlertTriangle,
-    accent: "text-amber-500",
+    accent: "text-warning",
   },
   {
     id: 3,
     key: "recommendations" as const,
     title: "Recommendations",
     icon: Lightbulb,
-    accent: "text-blue-500",
+    accent: "text-brand-light",
   },
 ]

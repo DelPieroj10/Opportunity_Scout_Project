@@ -17,7 +17,7 @@ export function OpportunityCards({data, isLoading = false}: OpportunityCardProps
       {COLUMNS.map((column) => (
         <Card key={column.key} className="flex flex-col h-full">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-gray-400">
+            <CardTitle className="flex items-center gap-2">
               <column.icon className={`size-4 ${column.accent}`}/>
               {column.title}
             </CardTitle>
@@ -39,7 +39,7 @@ export function OpportunityCards({data, isLoading = false}: OpportunityCardProps
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-muted-foreground text-blue-400">
+              <p className="text-sm text-muted-foreground">
                 No {column.key} to display. Run a search to see results here.
               </p>
             )}
